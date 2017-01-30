@@ -21,6 +21,7 @@ var index_4 = require("./_services/index");
 var index_5 = require("./home/index");
 var index_6 = require("./login/index");
 var index_7 = require("./register/index");
+var index_8 = require("./teams/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +40,8 @@ AppModule = __decorate([
             index_2.AlertComponent,
             index_5.HomeComponent,
             index_6.LoginComponent,
-            index_7.RegisterComponent
+            index_7.RegisterComponent,
+            index_8.TeamsComponent
         ],
         providers: [
             index_3.AuthGuard,

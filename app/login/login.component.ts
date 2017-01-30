@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        console.log(this.returnUrl);
+
     }
 
     login() {
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
+                    this.returnUrl = "/teams";
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {

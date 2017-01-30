@@ -25,12 +25,14 @@ var LoginComponent = (function () {
         this.authenticationService.logout();
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        console.log(this.returnUrl);
     };
     LoginComponent.prototype.login = function () {
         var _this = this;
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(function (data) {
+            _this.returnUrl = "/teams";
             _this.router.navigate([_this.returnUrl]);
         }, function (error) {
             _this.alertService.error(error);

@@ -7,10 +7,12 @@ exports.fakeBackendProvider = {
     useFactory: function (backend, options) {
         // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];
+        var teams = ["Blue Bombers", "Red Devils", "Yellow Jackets"];
         // configure fake backend
         backend.connections.subscribe(function (connection) {
             // wrap in timeout to simulate server api call
             setTimeout(function () {
+                // User-related mocks 
                 // authenticate
                 if (connection.request.url.endsWith('/api/authenticate') && connection.request.method === http_1.RequestMethod.Post) {
                     // get parameters from post request
@@ -100,6 +102,18 @@ exports.fakeBackendProvider = {
                         }
                         // respond 200 OK
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
+                    }
+                    else {
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
+                    }
+                }
+                // Team-related mocks 
+                // get users
+                if (connection.request.url.endsWith('/api/teams') && connection.request.method === http_1.RequestMethod.Get) {
+                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                    if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: teams })));
                     }
                     else {
                         // return 401 not authorised if token is null or invalid
