@@ -5,3 +5,23 @@
 .help-block {
     font-size: 12px;
 }
+
+div.list-containers {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	height: 600px;
+}
+
+
+div.team-list {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	padding: 15px;
+	display: flex;
+	background-color: #BBBBBB;
+	color: white;
+	width: 400px;
+	height: 50px;
+}

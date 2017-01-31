@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Team } from '../models/index';
-import { TeamsService } from '../services/index';
+import { Team } from '../_models/index';
+import { TeamsService } from '../_services/index';
 
 
 @Component({
@@ -14,16 +14,16 @@ export class TeamsComponent {
     teams: Team[] = [];
     username: string = "";
 
-    constructor() {
+    constructor(private teamsService: TeamsService) {
         this.username = "Ian McCallum";
         this.teams = [];
     };
 
     ngOnInit() {
         this.username = "Ian McCallum";
-    	// this.teamsService.getAll().subscribe(
-    	// 	teams => {
-    	// 		this.teams = teams;
-    	// 	});
+    	this.teamsService.getAll().subscribe(
+    		teams => {
+    			this.teams = teams;
+    		});
     };
 }

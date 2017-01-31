@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var index_1 = require("../_services/index");
 var TeamsComponent = (function () {
-    function TeamsComponent() {
+    function TeamsComponent(teamsService) {
+        this.teamsService = teamsService;
         this.teams = [];
         this.username = "";
         this.username = "Ian McCallum";
@@ -18,11 +20,11 @@ var TeamsComponent = (function () {
     }
     ;
     TeamsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.username = "Ian McCallum";
-        // this.teamsService.getAll().subscribe(
-        // 	teams => {
-        // 		this.teams = teams;
-        // 	});
+        this.teamsService.getAll().subscribe(function (teams) {
+            _this.teams = teams;
+        });
     };
     ;
     return TeamsComponent;
@@ -32,7 +34,7 @@ TeamsComponent = __decorate([
         moduleId: module.id,
         templateUrl: 'teams.component.html'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [index_1.TeamsService])
 ], TeamsComponent);
 exports.TeamsComponent = TeamsComponent;
 //# sourceMappingURL=teams.component.js.map
